@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RoutesModule } from './routes/routes.module';
@@ -33,7 +34,11 @@ const cassandraOptions: ExpressCassandraModuleOptions = {
 };
 
 @Module({
-  imports: [RoutesModule, ExpressCassandraModule.forRoot(cassandraOptions)],
+  imports: [
+    ConfigModule.forRoot(),
+    RoutesModule,
+    ExpressCassandraModule.forRoot(cassandraOptions),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
