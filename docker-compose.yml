@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  api:
+    container_name: fsfc_api
+    build: .
+    entrypoint: ./.docker/entrypoint.sh
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - scylla
+    networks:
+      - app-net
+
+  scylla:
+    container_name: fsfc_api_scylla
+    hostname: scylla
+    image: scylladb/scylla
+    restart: always
+    command: --api-address 0.0.0.0
+    ports:
+      - '9042:9042'
+    volumes:
+      - ./.docker/scylla:/var/lib/scylla
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
