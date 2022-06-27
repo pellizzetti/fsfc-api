@@ -4,6 +4,7 @@ import { RoutesController } from './routes.controller';
 import { Route } from './entities/route.entity';
 import { ExpressCassandraModule } from '@iaminfinity/express-cassandra';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { RoutesGateway } from './routes.gateway';
 
 @Module({
   imports: [
@@ -37,6 +38,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [RoutesController],
-  providers: [RoutesService],
+  providers: [RoutesService, RoutesGateway],
 })
 export class RoutesModule {}

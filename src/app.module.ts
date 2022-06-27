@@ -23,11 +23,11 @@ const cassandraOptions: ExpressCassandraModuleOptions = {
       class: 'SimpleStrategy',
       replication_factor: 1,
     },
-    migration: 'alter',
+    migration: 'safe',
     udts: {
       position: {
         lat: 'double',
-        long: 'double',
+        lng: 'double',
       },
     },
   },
